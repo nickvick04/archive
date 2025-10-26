@@ -437,20 +437,26 @@
                         <input type="text" id="github-username" class="form-input" placeholder="Enter your GitHub username" />
                         <div class="validation-message" id="github-validation-message"></div>
                     </div>
-                    
+                         
                     <div class="modal-next-steps">
                         <h4>What happens next:</h4>
                         <p id="modal-next-steps-text">Select a contest above, then click the button below to send the PDF via email.</p>
-                    </div>
+                    </div>   
+                    
+                    <input type="file" id="statement-pdf" accept=".pdf, application/pdf" />
+
                 </div>
             </div>
+
+            
+
             <div class="modal-footer">
                 <button class="modal-button modal-button-secondary" id="modal-cancel">Cancel</button>
                 <button class="modal-button modal-button-primary" id="modal-submit">Submit</button>
             </div>
         </div>
     </div>
-
+    
     <script>
         // Global data storage
         let contestList = {};
@@ -1213,6 +1219,7 @@
             console.log('Contest tree built successfully!');
             console.log('Final tree structure:', treeContainer.innerHTML.substring(0, 200) + '...');
         }
+        
 
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -1332,6 +1339,7 @@
             const modalNextSteps = document.getElementById('modal-next-steps-text');
             const contestSelect = document.getElementById('contest-select');
             const modalIcon = document.getElementById('modal-icon');
+            
 
             // SVG icons for different submission types
             const modalIcons = {
@@ -1359,7 +1367,7 @@
                 'statements': {
                     title: 'Submit Problem Statements',
                     description: 'Help us by providing the official problem statement PDF',
-                    nextSteps: 'Select a contest (or specific year) above, then click the button below to send the PDF via email. One PDF per contest.',
+                    nextSteps: 'Select a contest (or specific year) above, then click the button below to attach your problem statement PDF.',
                     filterType: 'statements'
                 },
                 'data': {
@@ -1406,6 +1414,7 @@
                 } else {
                     githubField.style.display = 'none';
                 }
+
 
                 // Hide badge for all modals
                 const badgeContainer = document.getElementById('form-label-container');
@@ -1668,10 +1677,23 @@
                     const githubUsername = document.getElementById('github-username').value.trim();
                     const githubValid = githubUsername && githubUsername.length > 0;
                     submitButton.disabled = !(contestSelected && githubValid);
-                } else {
+                } 
+                else if (modalTitle === 'Submit Problem Statements'){
+                    const statementPDF = document.getElementById('statement-pdf');
+                    submitButton.disabled = !((statementPDF.files && statementPDF.files.length > 0) && contestSelected)
+
+                }
+                else {
                     submitButton.disabled = !contestSelected;
                 }
             }
+
+            const statementPDF = document.getElementById('statement-pdf');
+            statementPDF.addEventListener('change', () => {
+                if (statementPDF && statementPDF.files.length > 0){
+                    validateForm();
+                }
+            })
             
             // GitHub username blur event for validation (when user finishes typing)
             document.addEventListener('blur', async function(e) {
@@ -1814,14 +1836,7 @@
                 // Check if this is the statements modal and handle mailto
                 const modalTitle = document.getElementById('modal-title').textContent;
                 if (modalTitle === 'Submit Problem Statements') {
-                    // Create mailto link for problem statements
-                    const subject = `Problem Statements for ${displayName}`;
-                    const body = isGroupSelection ? 
-                        '[Please attach the problem statement PDFs to this email]' : 
-                        '[Please attach the problem statement PDF to this email]';
-                    
-                    const mailtoLink = `mailto:fredrik@icpc.global?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                    window.open(mailtoLink);
+                    uploadPDF(document.getElementById('contest-select').value);
                 } else if (modalTitle === 'Submit Test Data') {
                     // Create mailto link for test data
                     const githubUsername = document.getElementById('github-username').value.trim();
@@ -1939,6 +1954,65 @@
                 }
             });
         });
+
+        const UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbxujEuQzZ5C3SvPQbpHsct6cPWNB2d65A2AlwJFmhVZgsPz_T6WKVYxOJUTzFq5dLvs/exec';
+
+        async function uploadPDF(folderName) {
+            const file = document.getElementById('statement-pdf').files[0];
+            if (!file) return;
+
+            // Disable input while uploading
+            document.getElementById('statement-pdf').disabled = true;
+
+            const reader = new FileReader();
+            reader.onload = async () => {
+                try {
+                    const base64 = reader.result.split(',')[1];
+                    const formData = new FormData();
+                    formData.append('file', base64);
+                    formData.append('filename', file.name);
+                    formData.append('type', file.type);
+                
+                    const subfolderName = folderName;
+
+                    console.log("foldername", subfolderName);
+                    formData.append('subfolder', subfolderName);
+
+                    console.log('Uploading to subfolder:', subfolderName);
+                    
+                    const response = await fetch(UPLOAD_URL, { 
+                        method: 'POST', 
+                        body: formData 
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        console.log('Upload successful!');
+                        console.log('File:', result.message);
+                        console.log('Folder:', result.folder);
+                        console.log('URL:', result.url);
+                        alert(result.message);
+                    } else {
+                        console.error('Upload failed:', result.message);
+                        alert(result.message);
+                    }
+                    
+                    // Reset file input
+                    document.getElementById('statement-pdf').value = '';
+                    
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    alert('Upload failed: ' + error.message);
+                } finally {
+                    // Re-enable input
+                    document.getElementById('statement-pdf').disabled = false;
+                }
+            };
+            
+            reader.readAsDataURL(file);
+        };
+
     </script>
     
     <!-- Footer -->
