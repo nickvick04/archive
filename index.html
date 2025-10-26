@@ -443,7 +443,7 @@
                         <p id="modal-next-steps-text">Select a contest above, then click the button below to send the PDF via email.</p>
                     </div>   
                     
-                    <input type="file" id="statement-pdf" accept=".pdf, application/pdf" />
+                    <input type="file" id="statement-pdf" accept=".pdf, application/pdf" style="display:none;"/>
 
                 </div>
             </div>
@@ -1406,6 +1406,9 @@
                 modalDescription.textContent = config.description;
                 modalNextSteps.textContent = config.nextSteps;
 
+                if (type == 'statements') {
+                    document.getElementById('statement-pdf').style.display = 'block';
+                }
                 
                 // Show/hide GitHub username field for test data, solutions, and packages modals
                 const githubField = document.getElementById('github-username-field');
@@ -1534,6 +1537,7 @@
                 modalOverlay.classList.remove('show');
                 document.body.style.overflow = ''; // Restore scrolling
                 contestSelect.value = ''; // Reset select
+                document.getElementById('statement-pdf').style.display = 'none'; // reset file input visibility
                 
                 // Reset GitHub username field
                 const githubUsername = document.getElementById('github-username');
