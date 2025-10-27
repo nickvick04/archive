@@ -1450,9 +1450,10 @@
                 
                 // For problem statements modal, adjust text based on contest type
                 if (type === 'statements') {
+                    document.getElementById('statement-pdf').style.display = 'block';
                     if (contest.isGeneralContest) {
                         modalDescription.textContent = 'Help us by providing the official problem statement PDFs';
-                        modalNextSteps.textContent = 'Select a contest above, then click the button below to send the PDFs via email. Multiple PDFs may be needed for different years.';
+                        modalNextSteps.textContent = 'Click the button below to upload problem statements. If you have multiple PDFs, please combine them into one file.';
                     } else {
                         modalDescription.textContent = config.description;
                         modalNextSteps.textContent = config.nextSteps;
