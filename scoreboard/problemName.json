@@ -1,0 +1,15 @@
+[
+    { "problem_id": "andpermutation", "name": "AND Permutation" },
+    { "problem_id": "appleorchard", "name": "Apple Orchard" },
+    { "problem_id": "cleaningrobot", "name": "Cleaning Robot" },
+    { "problem_id": "contestconstruction", "name": "Contest Construction" },
+    { "problem_id": "ketekcounting", "name": "Ketek Counting"},
+    { "problem_id": "mountainouspalindromesubarray", "name": "Mountainous Palindromic Subarray"},
+    { "problem_id": "permutationcfg", "name": "Permutation CFG"},
+    { "problem_id": "specialcycle", "name": "Special Cycle"},
+    { "problem_id": "thekingsguards", "name": "The King's Guards"},
+    { "problem_id": "thepaladin", "name": "The Paladin"},
+    { "problem_id": "tokengame", "name": "Token Game"},
+    { "problem_id": "travelog", "name": "TraveLog"},
+    { "problem_id": "youbethejudge2", "name": "You be The Judge, Again"}
+  ]
