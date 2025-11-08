@@ -1,0 +1,19 @@
+[
+    {"id":"winner","citation":"Winner","team_ids":[336500]},
+    {"id":"gold-medal","citation":"Gold Medal Winner","team_ids":[336500,336499,336518,336503]},
+    {"id":"silver-medal","citation":"Silver Medal Winner","team_ids":[336500,336499,336518,336503]},
+    {"id":"bronze-medal","citation":"Bronze Medal Winner","team_ids":[336500,336499,336518,336503]},
+    {"id":"first-to-solve-andpermutation","citation":"First to solve problem AND Permutation","team_ids":[336500]},
+    {"id":"first-to-solve-appleorchard","citation":"First to solve problem Apple Orchard","team_ids":[336500]},
+    {"id":"first-to-solve-cleaningrobot","citation":"First to solve problem Cleaning Robot","team_ids":{"6":336504}},
+    {"id":"first-to-solve-contestconstruction","citation":"First to solve problem Contest Construction","team_ids":{"1":336499}},
+    {"id":"first-to-solve-ketekcounting","citation":"First to solve problem Ketek Counting","team_ids":[336500]},
+    {"id":"first-to-solve-mountainouspalindromesubarray","citation":"First to solve problem Mountainous Palindromic Subarray","team_ids":{"11":336509}},
+    {"id":"first-to-solve-permutationcfg","citation":"First to solve problem Permutation CFG","team_ids":[336500]},
+    {"id":"first-to-solve-specialcycle","citation":"First to solve problem Special Cycle","team_ids":[]},
+    {"id":"first-to-solve-thekingsguards","citation":"First to solve problem The King's Guards","team_ids":[336500]},
+    {"id":"first-to-solve-thepaladin","citation":"First to solve problem The Paladin","team_ids":{"3":336503}},
+    {"id":"first-to-solve-tokengame","citation":"First to solve problem Token Game","team_ids":{"1":336499}},
+    {"id":"first-to-solve-travelog","citation":"First to solve problem TraveLog","team_ids":{"3":336503}},
+    {"id":"first-to-solve-youbethejudge2","citation":"First to solve problem You be The Judge, Again","team_ids":{"22":336525}}
+]
