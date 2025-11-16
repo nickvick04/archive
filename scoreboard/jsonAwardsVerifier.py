@@ -74,11 +74,11 @@ def verify_awards_json(filepath: Path):
     try:
         data = json.loads(Path(filepath).read_text(encoding="utf-8"))
     except Exception as e:
-        print(f"❌ Failed to load JSON: {e}")
+        print(f"Failed to load JSON: {e}")
         return False
 
     if not isinstance(data, list):
-        print("❌ Root must be a list.")
+        print("Root must be a list.")
         return False
 
     errors = []
@@ -86,12 +86,12 @@ def verify_awards_json(filepath: Path):
         errors.extend(verify_award_entry(entry))
 
     if errors:
-        print("❌ Validation errors found:")
+        print("Validation errors found:")
         for err in errors:
             print("  -", err)
         return False
 
-    print("✅ awards.json is valid!")
+    print("awards.json is valid!")
     return True
 
 
