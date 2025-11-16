@@ -62,7 +62,6 @@ def verify_problem_json(filepath: Path):
     print("problemName.json is valid!")
     return True
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python verify_problemName_json.py problemName.json")

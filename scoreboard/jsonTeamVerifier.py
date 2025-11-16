@@ -80,7 +80,6 @@ def verify_teams_json(filepath: Path):
         print("teams.json is valid!")
         return True
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python verify_teams_json.py <path_to_teams.json>")

@@ -68,7 +68,6 @@ def verify_scoreboard(filename):
             print(" -", e)
         return 1
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python verify_scoreboard.py <Scoreboard.json>")

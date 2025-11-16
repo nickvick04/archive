@@ -2,7 +2,7 @@ import json
 import sys
 from pathlib import Path
 
-REQUIRED_KEYS = {"id", "citation", "team_ids"}
+REQUIRED_KEYS = {"id", "citation", "team_ids"} 
 
 def validate_team_ids(value, award_id):
     errors = []
@@ -93,7 +93,6 @@ def verify_awards_json(filepath: Path):
 
     print("awards.json is valid!")
     return True
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
