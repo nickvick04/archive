@@ -1423,6 +1423,46 @@ code, pre {
     cursor: not-allowed;
 }
 
+.upload-pdf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#statement-pdf {
+    display: none;
+}
+
+#statement-pdf-label {
+    display: none;
+    padding: 10px 15px;
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    margin:10px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#statement-pdf-label:hover {
+    background: var(--secondary-text);
+}
+
+.upload-logo {
+    color: var(--accent);
+}
+
+.modal-next-steps.upload-pdf.dragover {
+    border-color: var(--accent);
+    background: #eff6ff;
+    transform: scale(1.02);
+}
+
+#uploadArea {
+    display: none;
+}
+
 /* Mobile responsive modal */
 @media (max-width: 768px) {
     .modal-container {
@@ -1446,4 +1486,5 @@ code, pre {
     .modal-button {
         width: 100%;
     }
+
 } 
